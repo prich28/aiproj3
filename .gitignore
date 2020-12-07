@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# PyCharm Stuff
+.idea/
+eval_NB-BOW-OV.txt
+eval_NB-BOW-FV.txt
+trace_BW-BOW-FV.txt
+trace_BW-BOW-OV.txt
+covid_test_public.tsv
+covid_training.tsv
