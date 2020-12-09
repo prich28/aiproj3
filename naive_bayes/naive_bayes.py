@@ -20,7 +20,7 @@ class NaiveBayes:
                 if lower_case_word not in self.vocabulary:
                     self.vocabulary.append(lower_case_word)
 
-        print("All unique words: " + str(len(self.vocabulary)))
+        print("Original vocabulary count: " + str(len(self.vocabulary)))
 
     # Creates a vocabulary only with words that appear more than once in training set
     def create_filtered_vocabulary(self):
@@ -37,7 +37,7 @@ class NaiveBayes:
                 if occurrence > 1:
                     self.vocabulary.append(word)
 
-        print("Unique words occurring > than once: " + str(len(self.vocabulary)))
+        print("Filtered vocabulary count: " + str(len(self.vocabulary)))
 
     # Sets the prior probabilities of the classes
     def set_priors(self):

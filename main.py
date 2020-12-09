@@ -17,6 +17,7 @@ def import_data(file_name):
         print("     The program will close, try running again!")
         exit(1)
 
+    # In order to be able to import both the training set (with headers), pops the header if it exists
     if (data_array[0][0] == "tweet_id") or (data_array[0][1] == "text") or (data_array[0][1] == "q1_label"):
         data_array.pop(0)
 
@@ -112,6 +113,7 @@ test_file_name = input("Type the name of the test file (with extension): ")
 training_data = arrange_data(import_data(training_file_name))
 test_data = arrange_data(import_data(test_file_name))
 
+# OV SECTION:
 # Create NaiveBayes object with Original Vocabulary
 nb_ov = NaiveBayes(training_data)
 
@@ -120,19 +122,25 @@ nb_ov.create_vocabulary()
 nb_ov.set_priors()
 nb_ov.set_word_probability_by_class()
 
-# Provide test set (output: array of tweet result objects)
+# Run test set (output: array of tweet result objects)
 ov_results = nb_ov.tweet_tester(test_data)
 
 export_data(ov_results, "OV")
 output_evaluation(ov_results, "OV")
 
+# FV SECTION:
 # Create NaiveBayes object with FilteredVocabulary
 nb_fv = NaiveBayes(training_data)
+
+# Train NaiveBayes object
 nb_fv.create_filtered_vocabulary()
 nb_fv.set_priors()
 nb_fv.set_word_probability_by_class()
 
+# Run test set (output: array of tweet result objects)
 fv_results = nb_fv.tweet_tester(test_data)
 
 export_data(fv_results, "FV")
 output_evaluation(fv_results, "FV")
+
+print("FINISHED!")
