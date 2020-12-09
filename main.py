@@ -54,6 +54,7 @@ def precision(all_results, class_type):
         if tweet.prediction == class_type:
             tp_and_fp += 1.0
 
+    # For each class (ex. yes), all of the tweets labeled yes, that are yes, divided by all the tweets it labeled yes.
     return true_positives / tp_and_fp
 
 
@@ -67,6 +68,7 @@ def recall(all_results, class_type):
         if tweet.real_value == class_type:
             tp_and_fn += 1.0
 
+    # For each class (ex. yes), all of the tweets labeled yes, that are yes, divided by all the tweets that are yes.
     return true_positives / tp_and_fn
 
 
@@ -87,10 +89,10 @@ def output_evaluation(all_results, vocab_type):
     no_f1 = f1_measure(no_precision, no_recall)
 
     with open(output_filename, "w") as output:
-        output.write(str(acc) + "\n")
-        output.write(str(yes_precision) + "  " + str(no_precision) + "\n")
-        output.write(str(yes_recall) + "  " + str(no_recall) + "\n")
-        output.write(str(yes_f1) + "  " + str(no_f1) + "\n")
+        output.write(str(round(acc, 4)) + "\n")
+        output.write(str(round(yes_precision, 4)) + "  " + str(round(no_precision, 4)) + "\n")
+        output.write(str(round(yes_recall, 4)) + "  " + str(round(no_recall, 4)) + "\n")
+        output.write(str(round(yes_f1, 4)) + "  " + str(round(no_f1, 4)) + "\n")
 
 
 training_file_name = "covid_training.tsv"
