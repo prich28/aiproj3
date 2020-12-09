@@ -4,11 +4,18 @@ from naive_bayes.naive_bayes import NaiveBayes
 
 def import_data(file_name):
     data_array = []
-    with open(file_name, ) as training_file:
-        training_import_object = csv.reader(training_file, delimiter='\t')
+    try:
+        with open(file_name, ) as training_file:
+            training_import_object = csv.reader(training_file, delimiter='\t')
 
-        for data in training_import_object:
-            data_array.append(data)
+            for data in training_import_object:
+                data_array.append(data)
+    except FileNotFoundError:
+        print("     We cannot load the file '" + file_name + "'")
+        print("     Make sure the file is in the correct folder, (with main.py)")
+        print("     Make sure you have spelled the filename correctly")
+        print("     The program will close, try running again!")
+        exit(1)
 
     if (data_array[0][0] == "tweet_id") or (data_array[0][1] == "text") or (data_array[0][1] == "q1_label"):
         data_array.pop(0)
@@ -95,9 +102,12 @@ def output_evaluation(all_results, vocab_type):
         output.write(str(round(yes_f1, 4)) + "  " + str(round(no_f1, 4)) + "\n")
 
 
-training_file_name = "covid_training.tsv"
-test_file_name = "covid_test_public.tsv"
+training_file_name = input("Type the name of the training file (with extension): ")
 
+test_file_name = input("Type the name of the test file (with extension): ")
+
+# training_file_name = "covid_training.tsv"
+# test_file_name = "covid_test_public.tsv"
 
 training_data = arrange_data(import_data(training_file_name))
 test_data = arrange_data(import_data(test_file_name))
