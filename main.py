@@ -25,7 +25,7 @@ def import_data(file_name):
 
 
 def export_data(all_results, vocab_type):
-    output_filename = "trace_BW-BOW-" + vocab_type + ".txt"
+    output_filename = "trace_NB-BOW-" + vocab_type + ".txt"
     with open(output_filename, "w") as output:
         for result in all_results:
             output.write(result.tweet_id + "  ")

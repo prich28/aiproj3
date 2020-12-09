@@ -57,25 +57,27 @@ class NaiveBayes:
 
     # Sets each vocab word probability by class
     def set_word_probability_by_class(self):
-        # Can have duplicates
+        # Can have duplicates (only words in the vocabulary)
         yes = []
         no = []
 
-        # Separate all words into each class
+        # Separate all words into each class (does not add words not in vocabulary)
         for item in self.training_data:
             tweet = item[1]
             if item[2] == "yes":
                 list_of_words = tweet.split()
                 for word in list_of_words:
                     lower_case_word = word.lower()
-                    yes.append(lower_case_word)
+                    if lower_case_word in self.vocabulary:
+                        yes.append(lower_case_word)
             if item[2] == "no":
                 list_of_words = tweet.split()
                 for word in list_of_words:
                     lower_case_word = word.lower()
-                    no.append(lower_case_word)
+                    if lower_case_word in self.vocabulary:
+                        no.append(lower_case_word)
 
-        # Including all duplicates of words
+        # Including all duplicates of words (but NOT words not contained in the vocabulary)
         word_count_yes = float(len(yes))
         word_count_no = float(len(no))
 
@@ -83,6 +85,7 @@ class NaiveBayes:
         self.p_word_class["no"] = {}
 
         for word in self.vocabulary:
+            # Smoothing denominator value
             smoothed_vocab_size = float(len(self.vocabulary))*self.smoothing_value
 
             freq_in_yes = float(yes.count(word))
