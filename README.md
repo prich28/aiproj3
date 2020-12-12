@@ -1,4 +1,4 @@
-# aiproj3
+# COMP 472 Naive Bayes Bag of Words (aiproj3)
 https://github.com/prich28/aiproj3
 
 Naive Bayes Bag of Words
